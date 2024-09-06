@@ -99,3 +99,12 @@ button:hover {
 button:active {
 background-color: #9c99c2;
 }
+
+button:disabled {
+    background-color: #615974;
+    cursor: not-allowed;
+}
+
+.selected {
+    background-color: #807cb1;
+}

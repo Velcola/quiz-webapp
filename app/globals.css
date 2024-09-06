@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 .roboto-thin {
@@ -73,25 +77,25 @@
 }
 
 .bg {
-    background-color: #5b5786;
+  background-color: #5b5786;
 }
 
 .primary {
-    background-color: #726DA8;
+  background-color: #726DA8;
 }
 
 .secondary {
-    background-color: #5b5786;
+  background-color: #5b5786;
 }
 
 button {
-    transition: background-color 0.3s ease-out;
+  transition: background-color 0.3s ease-out;
 }
 
 button:hover {
-    background-color: #807cb1;
+  background-color: #807cb1;
 }
 
 button:active {
- background-color: #9c99c2;
+background-color: #9c99c2;
 }

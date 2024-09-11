@@ -13,6 +13,7 @@ const page = () => {
     const [activeQuestion, setActiveQuestion] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState('');
     const [checked, setChecked] = useState(false);
+    const [answered, setAnswered] = useState(false);
     const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
     const [showResult, setShowResult] = useState(false);
     const [result, setResult] = useState({
@@ -50,16 +51,14 @@ const page = () => {
 
         if(answer === correctAnswer) {
             setSelectedAnswer(true);
-            console.log('set selected answer state to true');
             
         } else {
             setSelectedAnswer(false);
-            console.log('set selected answer state to false');
         }
     }
 
     const runNextQuestion = () => {
-        setSelectedAnswerIndex(null);
+        setAnswered(true);
         setResult((prev) => 
             selectedAnswer ? {
                 ...prev,
@@ -69,21 +68,26 @@ const page = () => {
                 ...prev,
                 wrongAnswers: prev.wrongAnswers + 1
             }
-        )
+        );
 
-        if(activeQuestion !== questions.length - 1) {
-            setActiveQuestion((prev) => prev + 1);
-        } else {
-            setActiveQuestion(0);
-            setShowResult(true);
-        }
 
-        setSelectedAnswer(false);
-        setChecked(false);
-    }
+        setTimeout(() => {
+            setSelectedAnswerIndex(null);
 
-    console.log(questions.length);
-    
+            if (activeQuestion !== questions.length - 1) {
+                setActiveQuestion((prev) => prev + 1);
+                setAnswered(false);
+            } else {
+                setShowResult(true); // Show results after the last question
+            }
+        }, 2000)
+
+        setChecked(false); // Reset checked state
+        setSelectedAnswer(false); // Reset selected answer state
+    };
+
+    console.log(`ANSWERED: ${answered}`);
+
 
     return (
         <main className="bg h-screen flex flex-col gap-4 justify-center items-center">
@@ -112,7 +116,14 @@ const page = () => {
                     {!showResult ? (
                         <div className="m-3 flex flex-col gap-2" id="answers">
                             {answers.map((answer, idx) => (
-                                <button onClick={() => onAnswerSelected(answer, idx)} key={idx} className={selectedAnswerIndex === idx ? "selected secondary rounded-lg shadow-sm p-2" : "secondary rounded-lg shadow-sm p-2"}>
+                                <button 
+                                    onClick={() => onAnswerSelected(answer, idx)}
+                                    key={idx}
+                                    className={`
+                                        ${selectedAnswerIndex === idx ? "selected secondary rounded-lg shadow-sm p-2" : "secondary rounded-lg shadow-sm p-2"}
+                                        ${answered && answer === correctAnswer ? "!bg-green-700" : ""} 
+                                        ${answered && selectedAnswerIndex === idx && answer !== correctAnswer ? "!bg-red-700" : ""}
+                                    `}>
                                     {answer}
                                 </button>
                             ))}
@@ -129,7 +140,7 @@ const page = () => {
             </div>
             <div className="w-full max-w-2xl flex flex-col justify-center items-center text-center px-4">
                 <div className="w-full primary text-white shadow-md rounded-lg">
-                    <div className="m-3 flex flex-col gap-2" id="answers">
+                    <div className="m-3 flex flex-col gap-2">
                         {showResult ? (
                             <button onClick={() => window.location.reload()} className="secondary rounded-lg shadow-sm p-2">
                                 Prøv igjen
@@ -137,11 +148,11 @@ const page = () => {
                         ) : (
                             <div className="flex flex-col">
                                 {checked ? (
-                                    <button onClick={runNextQuestion} className="secondary rounded-lg shadow-sm p-2">
+                                    <button id="proceedBtn" onClick={runNextQuestion} className="secondary rounded-lg shadow-sm p-2">
                                         {activeQuestion === questions.length - 1 ? (<span>Avslutt</span>) : (<span>Neste</span>)}
                                     </button>
                                 ) : (
-                                    <button onClick={runNextQuestion} className="secondary rounded-lg shadow-sm p-2" disabled>
+                                    <button id="proceedBtn" onClick={runNextQuestion} className="secondary rounded-lg shadow-sm p-2" disabled>
                                         {activeQuestion === questions.length - 1 ? (<span>Avslutt</span>) : (<span>Neste</span>)}
                                     </button>
                                 )}

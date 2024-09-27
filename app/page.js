@@ -10,8 +10,8 @@ export default function Home() {
   return (
     <main className="bg h-screen flex justify-center items-center">
       <div className="w-full max-w-lg flex flex-col justify-center items-center text-center px-4">
-        <h1 className="text-3xl text-white roboto-medium mb-3">Velg en Quiz..</h1>
-        <div className="w-full primary text-white shadow-md rounded-lg">
+        <h1 className="text-3xl text-black roboto-bold mb-3">Velg en Quiz..</h1>
+        <div className="w-full primary text-white  rounded-lg">
           <div className="m-3 flex flex-col gap-2">
             <Link href={{
               pathname: '/quiz',
@@ -35,14 +35,6 @@ export default function Home() {
             }} legacyBehavior>
               <button className="secondary rounded-lg shadow-sm p-2">
                   .•°¤* Geografi *¤°•.
-              </button>
-            </Link>
-            <Link  href={{
-              pathname: '/quiz',
-              query: { type: quizTypes.test }
-            }} legacyBehavior>
-              <button className="secondary rounded-lg shadow-sm p-2">
-                  test
               </button>
             </Link>
           </div>

@@ -20,12 +20,13 @@ const page = () => {
         score: 0,
         correctAnswers: 0,
         wrongAnswers: 0,
-    })
+    });
 
+    // useeffect function allows you to perform side effects in function components, such as fetching data, directly updating the DOM, and setting up subscriptions
     useEffect(() => {
         const quiz = data.find(obj => obj[type]);
         if(quiz) {
-            setQuizData(quiz[type])
+            setQuizData(quiz[type]);
         }
     }, [type]);
 
@@ -43,7 +44,7 @@ const page = () => {
     }
 
     const questions = quizData.questions;
-    const {question, answers, correctAnswer} = questions[activeQuestion];
+    const {answers, correctAnswer} = questions[activeQuestion];
 
     const onAnswerSelected = (answer, idx) => {
         setChecked(true);
@@ -70,7 +71,6 @@ const page = () => {
             }
         );
 
-
         setTimeout(() => {
             setSelectedAnswerIndex(null);
 
@@ -86,16 +86,13 @@ const page = () => {
         setSelectedAnswer(false); // Reset selected answer state
     };
 
-    console.log(`ANSWERED: ${answered}`);
-
-
     return (
         <main className="bg h-screen flex flex-col gap-4 justify-center items-center">
             <button onClick={() => {
                 router.push('/');
-            }} className="primary text-white rounded-lg shadow-sm p-2">Tilbake</button>
+            }} className="secondary text-white rounded-lg shadow-sm p-2">Tilbake</button>
             <div className="w-full max-w-2xl flex flex-col justify-center items-center text-center px-4">
-                <div className="w-full primary text-white shadow-md rounded-lg">
+                <div className="w-full primary text rounded-lg">
                 <div className="m-3 flex flex-col gap-2">
                     {!showResult ? (
                         <div>
@@ -112,7 +109,7 @@ const page = () => {
                 </div>
             </div>
             <div className="w-full max-w-2xl flex flex-col justify-center items-center text-center px-4">
-                <div className="w-full primary text-white shadow-md rounded-lg">
+                <div className="w-full primary text-white rounded-lg">
                     {!showResult ? (
                         <div className="m-3 flex flex-col gap-2" id="answers">
                             {answers.map((answer, idx) => (
@@ -129,7 +126,7 @@ const page = () => {
                             ))}
                         </div>
                     ) : (
-                        <div className="m-3">
+                        <div className="m-3 text">
                             <p className="text-lg flex justify-start">Antall spørsmål: {questions.length}</p>
                             <p className="text-lg flex justify-start">Score (5 per spørsmål): {result.score}</p>
                             <p className="text-lg flex justify-start">Riktige svar: {result.correctAnswers}</p>
@@ -139,21 +136,21 @@ const page = () => {
                 </div>
             </div>
             <div className="w-full max-w-2xl flex flex-col justify-center items-center text-center px-4">
-                <div className="w-full primary text-white shadow-md rounded-lg">
+                <div className="w-full primary text rounded-lg">
                     <div className="m-3 flex flex-col gap-2">
                         {showResult ? (
-                            <button onClick={() => window.location.reload()} className="secondary rounded-lg shadow-sm p-2">
+                            <button onClick={() => window.location.reload()} className="secondary rounded-lg text-white shadow-sm p-2">
                                 Prøv igjen
                             </button>
                         ) : (
                             <div className="flex flex-col">
                                 {checked ? (
-                                    <button id="proceedBtn" onClick={runNextQuestion} className="secondary rounded-lg shadow-sm p-2">
-                                        {activeQuestion === questions.length - 1 ? (<span>Avslutt</span>) : (<span>Neste</span>)}
+                                    <button id="proceedBtn" onClick={runNextQuestion} className="secondary text-white rounded-lg shadow-sm p-2">
+                                        {activeQuestion === questions.length - 1 ? (<span>Sjekk svar</span>) : (<span>Neste</span>)}
                                     </button>
                                 ) : (
-                                    <button id="proceedBtn" onClick={runNextQuestion} className="secondary rounded-lg shadow-sm p-2" disabled>
-                                        {activeQuestion === questions.length - 1 ? (<span>Avslutt</span>) : (<span>Neste</span>)}
+                                    <button id="proceedBtn" onClick={runNextQuestion} className="secondary text-white rounded-lg shadow-sm p-2" disabled>
+                                        {activeQuestion === questions.length - 1 ? (<span>Sjekk svar</span>) : (<span>Neste</span>)}
                                     </button>
                                 )}
                             </div>

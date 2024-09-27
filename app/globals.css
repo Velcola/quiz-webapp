@@ -77,15 +77,15 @@
 }
 
 .bg {
-  background-color: #5b5786;
+  background-color: #fbfbfe;
 }
 
 .primary {
-  background-color: #726DA8;
+  background-color: #dedcff;
 }
 
 .secondary {
-  background-color: #5b5786;
+  background-color: hsl(243, 68%, 48%, 55%);
 }
 
 button {
@@ -93,7 +93,7 @@ button {
 }
 
 button:hover {
-  background-color: #807cb1;
+  background-color: hsl(243, 68%, 48%, 70%);
 }
 
 button:active {
@@ -101,10 +101,35 @@ background-color: #9c99c2;
 }
 
 button:disabled {
-    background-color: #615974;
+    background-color: hsl(247, 75%, 5%, 20%);
     cursor: not-allowed;
 }
 
 .selected {
-    background-color: #807cb1;
+    background-color: hsl(243, 68%, 48%, 90%);
+}
+
+.text {
+    color: hsl(247, 75%, 5%, 65%);
+}
+
+.custom-shape-divider-bottom-1726815111 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1726815111 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 150px;
+}
+
+.custom-shape-divider-bottom-1726815111 .shape-fill {
+    fill: #2F27CE1A;
 }
